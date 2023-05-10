@@ -114,6 +114,30 @@ function verCarrito(){
 
 }
 
+function formaDePago(){
+    let fdp = prompt("Formas de pago (Ingrese la opción para más información): \n1)Efectivo\n2)Tarjeta de Credito\n3)Transferencia\n4)Volver al menu");
+    switch (fdp){
+        case "1":
+            alert("Abonando en efectivo tiene un 5% de descuento en el local.")
+            formaDePago()
+            break;
+        case "2":
+            alert("Se aceptan las siguientes tarjetas: \n VISA - MASTERCARD - AMERICAN EXPRESS \n1 Pago sin interes\n3 Pagos 5% de interes \n6 Pagos 10% de interes\n12 Pagos 15% de interes")
+            formaDePago()
+            break;
+        case "3":
+            alert("El cbu es: 0000000000000000000000001")
+            formaDePago()
+            break;
+        case "4":
+            program()
+            break;
+        default:
+            alert("Opcion ingresada incorrecta")
+            program()
+            break;    
+    }
+}
 
 function program() {
     while (verdad){
@@ -135,7 +159,7 @@ function program() {
                 alert ("Ingresaste la opcion 4");
                 break;
             case "6":
-                alert ("Ingresaste la opcion 5");
+                formaDePago();
                 break;
             case "7":
                 alert ("Ingresaste la opcion 6");
