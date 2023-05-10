@@ -145,7 +145,7 @@ function program() {
                 break;
             default:
                 alert("Ingres una opcion valida");
-                opcion = prompt("Ingrese una opción: \n1) Ver Productos \n2) Ver Carrito \n3) Eliminar Carrito \n4) Finalizar Compra \n5) Ver Formas de pago  \n6) \n7) Salir");
+                opcion = prompt("Ingrese una opción: \n1) Ver Productos \n2) Buscar Producto \n3) Ver Carrito \n4) Eliminar Producto Del Carrito  \n5) Finalizar Compra   \n6)Ver Formas de Pago \n8) Salir");
                 break;
         }
     }

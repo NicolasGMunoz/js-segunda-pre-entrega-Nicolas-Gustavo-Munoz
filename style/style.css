@@ -1,0 +1,13 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-image: linear-gradient(#171425, #3b116d);
+}
+
+.nn{
+    display: flex;
+    justify-content: center;
+}
