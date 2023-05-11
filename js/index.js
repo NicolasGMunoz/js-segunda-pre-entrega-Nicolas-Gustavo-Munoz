@@ -47,8 +47,33 @@ const productos = [
 let productosArray = [];
 let carrito = [];
 let verdad = true;
+let nombre = prompt("Ingrese su nombre");
+let edad = prompt("Ingrese su edad");
+let domicilio = prompt("Ingrese su domicilio");
+let dni = prompt("Ingrese su dni");
 
-/* Creamos la clase constructor  */
+/* Creamos la clase constructor de la persona */
+class Persona{
+    constructor (obj){
+        this.nombre = obj.nombre
+        this.edad = obj.edad
+        this.domicilio = obj.domicilio
+        this.dni = obj.dni
+    }
+    verPersona = () =>{
+        return `Nombre: ${this.nombre}\nEdad: ${this.edad}\nDNI: ${this.dni}\nDomicilio: ${this.domicilio}`
+    }
+}
+/* Creamos el objeto persona */
+const persona = new Persona({
+    nombre: nombre,
+    edad: edad,
+    domicilio: domicilio,
+    dni: dni
+})
+
+
+/* Creamos la clase constructor de los productos  */
 class Producto {
     constructor (id, name, precio){
         this.id = id;
@@ -66,14 +91,15 @@ for (const producto of productos){
 cargaDeProductos();
 
 
+/* Funcion para ver los productos */
 function verProductos(){
     for (const producto of productosArray) {
         alert(producto.name + "\n" + "$" + producto.precio)
     }
- 
     program()
 }
 
+/* Funcion para buscar y agregar un producto al carrito */ 
 function buscarProducto(){
     let productoBuscado = prompt("Ingrese el producto que deseas: \n1) Mate 3D Naruto \n2) Mate 3D Harry Potter \n3) Mate 3D Pokebola \n4) Figura Baby Groot 3D \n5) Figura Kurama 3D \n6) Stand Auriculares 3D \n7) Cuchillo Mariposa 3D")
     let productoEncontrado = productosArray.find((producto) => {
@@ -102,18 +128,24 @@ function verCarrito(){
     for (const producto of carrito) {
         alert(producto.name + "\n" + "$" + producto.precio)
     }
-    let comprar = prompt("Desea finalizar la compra: \nSi = 1 \nNO = 2");
-    if (comprar == 1){
-        let montoFinal = carrito.reduce((i, producto) => {
-            return i + producto.precio
-        }, 0)
-        alert (`El monto final es $${montoFinal}`);
-    }else {
+    if (carrito.length > 0 ){
+        let comprar = prompt("Desea finalizar la compra: \nSi = 1 \nNO = 2");
+        if (comprar == 1){
+            let montoFinal = carrito.reduce((i, producto) => {
+                return i + producto.precio
+            }, 0)
+            alert (`El monto final es $${montoFinal}`);
+        }else {
+            program();
+        }   
+    }else{
+        alert ("Su carrito esta vacio");3
         program();
     }
 
 }
 
+/* Funcion para ver las formas de pago */
 function formaDePago(){
     let fdp = prompt("Formas de pago (Ingrese la opción para más información): \n1)Efectivo\n2)Tarjeta de Credito\n3)Transferencia\n4)Volver al menu");
     switch (fdp){
@@ -139,9 +171,23 @@ function formaDePago(){
     }
 }
 
+
+while(verdad){
+    if(nombre === "" || edad === "" || domicilio === "" || dni === "" ){
+        alert("DEBE COMPLETAR TODOS LOS DATOS PARA PODER INGRESAR AL MENU")
+        nombre = prompt("Ingrese su nombre");
+        edad = prompt("Ingrese su edad");
+        domicilio = prompt("Ingrese su domicilio");
+        dni = prompt("Ingrese su dni");
+    }else{
+        program();
+    }
+}
+
 function program() {
+
     while (verdad){
-        let opcion = prompt("Ingrese una opción: \n1) Ver Productos \n2) Buscar Producto \n3) Ver Carrito \n4) Eliminar Producto Del Carrito  \n5) Finalizar Compra   \n6)Ver Formas de Pago \n8) Salir");
+        let opcion = prompt("Ingrese una opción: \n1) Ver Productos \n2) Buscar Producto \n3) Ver Carrito \n4) Eliminar Producto Del Carrito  \n5) Finalizar Compra   \n6) Ver Formas de Pago \n7) Ver Datos del Cliente \n8) Salir");
         switch (opcion) {
             case "1":
                 verProductos();
@@ -162,7 +208,7 @@ function program() {
                 formaDePago();
                 break;
             case "7":
-                alert ("Ingresaste la opcion 6");
+                alert(persona.verPersona())
                 break;
             case "8":
                 verdad = false;
@@ -174,7 +220,3 @@ function program() {
         }
     }
 }
-
-
-
-program();
