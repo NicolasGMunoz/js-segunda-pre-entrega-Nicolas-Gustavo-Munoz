@@ -101,7 +101,7 @@ function verProductos(){
 
 /* Funcion para buscar y agregar un producto al carrito */ 
 function buscarProducto(){
-    let productoBuscado = prompt("Ingrese el producto que deseas: \n1) Mate 3D Naruto \n2) Mate 3D Harry Potter \n3) Mate 3D Pokebola \n4) Figura Baby Groot 3D \n5) Figura Kurama 3D \n6) Stand Auriculares 3D \n7) Cuchillo Mariposa 3D")
+    let productoBuscado = Number(prompt("Ingrese el producto que deseas: \n1) Mate 3D Naruto \n2) Mate 3D Harry Potter \n3) Mate 3D Pokebola \n4) Figura Baby Groot 3D \n5) Figura Kurama 3D \n6) Stand Auriculares 3D \n7) Cuchillo Mariposa 3D \n8) Volver al menu"));
     let productoEncontrado = productosArray.find((producto) => {
         return producto.id == productoBuscado
     })
@@ -116,6 +116,8 @@ function buscarProducto(){
             program()
             }
 
+    }else if(productoBuscado === 8 ){
+        program();
     }else{
         alert("El producto no fue encontrado");
     }
@@ -126,10 +128,10 @@ function buscarProducto(){
 /* Funcion para ver los productos del carrito */
 function verCarrito(){
     for (const producto of carrito) {
-        alert(producto.name + "\n" + "$" + producto.precio)
+        alert(producto.id + ")" +"\n"+ producto.name + "\n" + "$" + producto.precio)
     }
     if (carrito.length > 0 ){
-        let comprar = prompt("Desea finalizar la compra: \nSi = 1 \nNO = 2");
+        let comprar = Number(prompt("Desea finalizar la compra: \nSi = 1 \nNO = 2"));
         if (comprar == 1){
             let montoFinal = carrito.reduce((i, producto) => {
                 return i + producto.precio
@@ -143,6 +145,96 @@ function verCarrito(){
         program();
     }
 
+}
+
+
+function interes() {
+    let montoFinal = carrito.reduce((i, producto) => {
+        return i + producto.precio
+    }, 0)
+    let interes = 0;
+    let cuotas = Number(prompt ("Ingrese la cantidas de cuotas: \n1 Pago sin interes\n3 Pagos 5% de interes \n6 Pagos 10% de interes\n12 Pagos 15% de interes"));
+    switch (cuotas) {
+        case 1:
+            monto = montoFinal;
+            alert("Usted abonara: $" + monto + "\nEn un solo pago");
+            break;
+        case 3:
+            monto =montoFinal * 0.05 +montoFinal;
+            interes = monto / 3;
+            alert("Usted abonara: $" + monto + "\nEn 3 cuotas de: $" + interes);
+            break;
+        case 6:
+            monto =montoFinal * 0.10 +montoFinal;
+            interes = monto / 6;
+            alert("Usted abonara: $" + monto + "\nEn 6 cuotas de: $" + interes);
+            break;
+        case 12:
+            monto =montoFinal * 0.15 +montoFinal;
+            interes = monto / 12;
+            alert("Usted abonara: $" + monto + "\nEn 12 cuotas de: $" + interes);
+            break;
+        default:
+            alert("Ingreso una opción incorrecta o no ingreso niguna opción");
+            finalizarCompra();
+            break;
+    }
+
+}
+
+function concretarPago(){
+    let sN = Number(prompt ("1) Pagar \n2) Cancelar"));
+    if (sN === 1){
+        alert ("Pago realizado con exito")
+    }else if (sN === 2){
+        alert ("Operacion cancelada");
+        program();
+    }else{
+        alert("Opcion incorrecta");
+        finalizarCompra();
+    }
+}
+
+function finalizarCompra(){
+    for (const producto of carrito) {
+    }
+    let montoFinal = carrito.reduce((i, producto) => {
+        return i + producto.precio
+    }, 0)
+    if (carrito.length > 0 ){
+        alert (`El monto final es $${montoFinal}`);
+        let comprar = Number(prompt("Desea finalizar la compra: \nSi = 1 \nNO = 2"));
+        if (comprar == 1){
+        let met = prompt ("1)Efectivo\n2)Tarjeta de Credito\n3)Transferencia\n4)Volver al menu");
+        switch (met){
+            case "1":
+                alert("Abonando en efectivo tiene un 5% de descuento en el local." + `\nEl monto a abonar es $${montoFinal - montoFinal*0.05}`)
+                concretarPago();
+                break;
+            case "2":
+                alert("Se aceptan las siguientes tarjetas: \n VISA - MASTERCARD - AMERICAN EXPRESS \n1 Pago sin interes\n3 Pagos 5% de interes \n6 Pagos 10% de interes\n12 Pagos 15% de interes")
+                interes();
+                concretarPago();
+                break;
+            case "3":
+                alert("El cbu es: 0000000000000000000000001" + `El monto a abonar es $${montoFinal}`)
+                concretarPago();
+                break;
+            case "4":
+                program()
+                break;
+            default:
+                alert("Opcion ingresada incorrecta")
+                program()
+                break;    
+        }
+        }else {
+           program();
+        }   
+    }else{
+        alert ("Su carrito esta vacio");3
+        program();
+    }
 }
 
 /* Funcion para ver las formas de pago */
@@ -171,6 +263,22 @@ function formaDePago(){
     }
 }
 
+function eliminarProducto(){
+    if (carrito.length > 0){
+        let id = parseInt(prompt("Ingrese el número del producto que desea eliminar el carrito"));
+        const index = carrito.findIndex(producto => producto.id === id)
+        if (index !== -1){
+            carrito.splice(index, 1);
+        }
+        verCarrito();
+    }else{
+        alert ("Su carrito esta vacio");3
+        program();
+    }
+
+}
+
+
 
 while(verdad){
     if(nombre === "" || edad === "" || domicilio === "" || dni === "" ){
@@ -185,7 +293,6 @@ while(verdad){
 }
 
 function program() {
-
     while (verdad){
         let opcion = prompt("Ingrese una opción: \n1) Ver Productos \n2) Buscar Producto \n3) Ver Carrito \n4) Eliminar Producto Del Carrito  \n5) Finalizar Compra   \n6) Ver Formas de Pago \n7) Ver Datos del Cliente \n8) Salir");
         switch (opcion) {
@@ -199,10 +306,10 @@ function program() {
                 verCarrito();
                 break;
             case "4":
-                alert ("Ingresaste la opcion 3");
+                 eliminarProducto();
                 break;
             case "5":
-                alert ("Ingresaste la opcion 4");
+                finalizarCompra();
                 break;
             case "6":
                 formaDePago();
@@ -215,7 +322,7 @@ function program() {
                 break;
             default:
                 alert("Ingres una opcion valida");
-                opcion = prompt("Ingrese una opción: \n1) Ver Productos \n2) Buscar Producto \n3) Ver Carrito \n4) Eliminar Producto Del Carrito  \n5) Finalizar Compra   \n6)Ver Formas de Pago \n8) Salir");
+                opcion = Number(prompt("Ingrese una opción: \n1) Ver Productos \n2) Buscar Producto \n3) Ver Carrito \n4) Eliminar Producto Del Carrito  \n5) Finalizar Compra   \n6) Ver Formas de Pago \n8) Salir"));
                 break;
         }
     }
