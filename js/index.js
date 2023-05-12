@@ -147,7 +147,7 @@ function verCarrito(){
 
 }
 
-
+/* Funcion para calcular el interes del pago */
 function interes() {
     let montoFinal = carrito.reduce((i, producto) => {
         return i + producto.precio
@@ -181,7 +181,7 @@ function interes() {
     }
 
 }
-
+/* Funcion para concretar la compra */
 function concretarPago(){
     let sN = Number(prompt ("1) Pagar \n2) Cancelar"));
     if (sN === 1){
@@ -195,6 +195,7 @@ function concretarPago(){
     }
 }
 
+/* Funcion para finalizar la compra */
 function finalizarCompra(){
     for (const producto of carrito) {
     }
@@ -263,6 +264,7 @@ function formaDePago(){
     }
 }
 
+/* Funcion para eliminar un producto */ 
 function eliminarProducto(){
     if (carrito.length > 0){
         let id = parseInt(prompt("Ingrese el número del producto que desea eliminar el carrito"));
@@ -280,7 +282,7 @@ function eliminarProducto(){
 }
 
 
-
+/* Simulador de login */
 while(verdad){
     if(nombre === "" || edad === "" || domicilio === "" || dni === "" ){
         alert("DEBE COMPLETAR TODOS LOS DATOS PARA PODER INGRESAR AL MENU")
@@ -293,6 +295,7 @@ while(verdad){
     }
 }
 
+/* Programa */
 function program() {
     while (verdad){
         let opcion = prompt("Ingrese una opción: \n1) Ver Productos \n2) Buscar Producto \n3) Ver Carrito \n4) Eliminar Producto Del Carrito  \n5) Finalizar Compra   \n6) Ver Formas de Pago \n7) Ver Datos del Cliente \n8) Salir");
