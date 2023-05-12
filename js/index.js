@@ -136,7 +136,7 @@ function verCarrito(){
             let montoFinal = carrito.reduce((i, producto) => {
                 return i + producto.precio
             }, 0)
-            alert (`El monto final es $${montoFinal}`);
+            finalizarCompra();
         }else {
             program();
         }   
@@ -269,6 +269,7 @@ function eliminarProducto(){
         const index = carrito.findIndex(producto => producto.id === id)
         if (index !== -1){
             carrito.splice(index, 1);
+            alert("El producto fue eliminado del carrito")
         }
         verCarrito();
     }else{
