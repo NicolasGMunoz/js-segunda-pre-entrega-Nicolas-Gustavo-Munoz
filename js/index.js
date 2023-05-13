@@ -93,9 +93,28 @@ cargaDeProductos();
 
 /* Funcion para ver los productos */
 function verProductos(){
-    for (const producto of productosArray) {
-        alert(producto.name + "\n" + "$" + producto.precio)
+   
+    let condi = Number(prompt ("1) Ver todos los productos \n2) Filtrar por Precio"))
+    if (condi === 1){
+        for (const producto of productosArray) {
+            alert(producto.name + "\n" + "$" + producto.precio)
+        }
+    }else if (condi === 2){
+        let min = parseInt(prompt("Ingrese el precio minimo"));
+        let max = parseInt(prompt("Ingrese el precio maximo"));
+        if (min > max) {
+            alert("El precio minimo no puede ser mayor al precio maximo");
+            buscarRangoDePrecios();
+        }else {
+            let productos = productosArray.filter(producto => producto.precio >= min && producto.precio <= max);
+            if (productos.length > 0) {
+                for (const producto of productos) {
+                    alert(producto.name + "\n" + "$" + producto.precio)
+                }
+            }
+        }
     }
+    
     program()
 }
 
@@ -326,7 +345,7 @@ function program() {
                 break;
             default:
                 alert("Ingres una opcion valida");
-                opcion = Number(prompt("Ingrese una opción: \n1) Ver Productos \n2) Buscar Producto \n3) Ver Carrito \n4) Eliminar Producto Del Carrito  \n5) Finalizar Compra   \n6) Ver Formas de Pago \n8) Salir"));
+                opcion = prompt("Ingrese una opción: \n1) Ver Productos \n2) Buscar Producto \n3) Ver Carrito \n4) Eliminar Producto Del Carrito  \n5) Finalizar Compra   \n6) Ver Formas de Pago \n7) Ver Datos del Cliente \n8) Salir");
                 break;
         }
     }
